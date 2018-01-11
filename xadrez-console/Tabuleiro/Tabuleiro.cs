@@ -18,5 +18,16 @@ namespace Tabuleiro
             this.Colunas = Colunas;
             Pecas = new Peca[Linhas, Colunas];
         }
+
+        public Peca Peca (int Linhas, int Colunas)
+        {
+            return Pecas[Linhas, Colunas];
+        }
+
+        public void ColocarPecas(Peca P, Posicao Posicao)
+        {
+            Pecas[Posicao.Linha, Posicao.Coluna] = P;
+            P.Posicao = Posicao;
+        }
     }
 }
