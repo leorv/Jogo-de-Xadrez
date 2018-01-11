@@ -2,6 +2,7 @@
 {
     enum Cor : int
     {
+        Preto = 0,
         Amarelo = 1,
         Branco = 2,
         AzulEscuro = 3,

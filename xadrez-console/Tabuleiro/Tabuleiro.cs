@@ -24,10 +24,45 @@ namespace Tabuleiro
             return Pecas[Linhas, Colunas];
         }
 
+        //Aqui faremos uma sobrecarga no método Peca.
+        public Peca Peca (Posicao posicao)
+        {
+            return Pecas[posicao.Linha, posicao.Coluna];
+        }
+
+        public bool ExistePeca(Posicao pos)
+        {
+            ValidarPosicao(pos);
+            return Peca(pos) != null;
+        }
+
         public void ColocarPecas(Peca P, Posicao Posicao)
         {
+            if (ExistePeca(Posicao))
+            {
+                throw new TabuleiroException("Já existe uma peça nesta posição.");
+            }
             Pecas[Posicao.Linha, Posicao.Coluna] = P;
             P.Posicao = Posicao;
+        }
+
+        public bool VerificarPosicao(Posicao pos)
+        {
+            if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas)
+            {
+                return false;
+            }
+            /*retornamos "true" sem fazer o else, pois o return já corta o método*/
+            return true;
+        }
+
+        public void ValidarPosicao(Posicao pos)
+        {
+            if (!VerificarPosicao(pos))
+            {
+                // ! significa "não", ou seja, se retornou falso lá. Lança a exceção.
+                throw new TabuleiroException("Posição Inválida!");
+            }
         }
     }
 }
