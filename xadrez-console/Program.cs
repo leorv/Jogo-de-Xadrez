@@ -14,12 +14,14 @@ namespace xadrez_console
         {
             try
             {
-                PosicaoXadrez posicao = new PosicaoXadrez('c', 7);
-                Console.WriteLine(posicao);
+                Tabuleiro.Tabuleiro Tab = new Tabuleiro.Tabuleiro(8, 8);
 
-                Console.WriteLine(posicao.ToPosicao());
+                Tab.ColocarPecas(new Torre(Tab, Cor.Branco), new Posicao(2, 3));
+                Tab.ColocarPecas(new Torre(Tab, Cor.Branco), new Posicao(5, 2));
+                Tab.ColocarPecas(new Torre(Tab, Cor.Preto), new Posicao(0, 3));
+                Tab.ColocarPecas(new Torre(Tab, Cor.Preto), new Posicao(6, 3));
 
-
+                Tela.ImprimirTabuleiro(Tab);
             }
             catch (TabuleiroException e)
             {
