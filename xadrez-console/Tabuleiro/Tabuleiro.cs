@@ -69,5 +69,19 @@ namespace Tabuleiro
                 throw new TabuleiroException("Posição Inválida!");
             }
         }
+
+        public Peca RetirarPeca(Posicao pos)
+        {
+            if (Peca(pos) == null)
+            {
+                return null;
+            }
+            Peca aux = Peca(pos);/*Criando uma peça auxiliar e recebendo o peça na
+            posição "pos". Logo dando o valor nulo para sua posição e fazendo com
+            que a varíavel aux fique nula também.*/
+            aux.Posicao = null;
+            Pecas[pos.Linha, pos.Coluna] = null;
+            return aux;
+        }
     }
 }
