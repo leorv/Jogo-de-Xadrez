@@ -23,7 +23,77 @@ namespace Xadrez
 
         public override string ToString()
         {
-            return "R ";
+            return "R";
         }
+
+        public override bool[,] MovimentosPossiveis()
+        {
+            bool[,] mat = new bool[Tab.Linhas, Tab.Colunas];
+            Posicao pos = new Posicao(0, 0);
+            //Serão descritos os movimentos do Rei.
+            //Norte
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;                
+            }
+            //Nordeste
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            //Direita
+            pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            //Sudeste
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            //Sul
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            //Sudoeste
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            //Oeste
+            pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            //Noroeste
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
+            if (Tab.VerificarPosicao(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            return mat;
+        }
+
+        private bool PodeMover(Posicao pos)
+        {
+            Peca p = Tab.Peca(pos);/*criamos uma peça auxiliar para capturar
+            * o que existe na posição e dizer se é nulo (não tem nada, pode mover)
+            * ou se existe uma peça de cor diferente, então pode mover tbm
+            * para capturá-la.*/
+            return p == null || p.Cor != Cor;
+            /*não é necessário colocar this.Cor, pois está sendo comparado
+             * a cor da peça na posição "tal" com a cor do rei.
+             * Retorna TRUE se for possível mover. */
+        }
+
+
     }
 }

@@ -26,7 +26,7 @@ namespace Tabuleiro
 
         //Aqui faremos uma sobrecarga no método Peca.
         public Peca Peca (Posicao posicao)
-        {
+        {//retorna a peça nesta posição.
             return Pecas[posicao.Linha, posicao.Coluna];
         }
 
@@ -35,7 +35,7 @@ namespace Tabuleiro
             ValidarPosicao(pos);//saber se está dentro dos limites do tabuleiro.
             return Peca(pos) != null;/* Se a matriz peça já tem uma peça em determinada
             posição, ela vai verificar o seguinte:
-            - se a peca(pos) é diferente de nulo, ou seja, se não tem nada (nenhuma peça)
+            - se a peca(pos) é diferente de nulo, ou seja, existe uma peça lá 
             nesta posição, a condição é satisfeita e me retorna TRUE.
             - se a peca(pos) é nulo, a condição de ser diferente não é satisfeita e me
             retornará FALSE.*/
@@ -57,7 +57,8 @@ namespace Tabuleiro
             {
                 return false;
             }
-            /*retornamos "true" sem fazer o else, pois o return já corta o método*/
+            /*retornamos "true" sem fazer o else, pois o return já corta o método
+             * retornará TRUE se a posição for possível executar (válida). */
             return true;
         }
 

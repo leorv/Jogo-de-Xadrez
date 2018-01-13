@@ -22,5 +22,13 @@ namespace Tabuleiro
             return "(" + Linha + ", " + Coluna + ")";
         }
 
+        public void DefinirValores(int Linha, int Coluna)
+        {
+            /* Auxilia na verificação dos movimentos possíveis de
+             * cada peça*/
+            this.Linha = Linha;
+            this.Coluna = Coluna;
+        }
+
     }
 }

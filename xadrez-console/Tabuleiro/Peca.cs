@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tabuleiro
 {
-    class Peca
+    abstract class Peca
     {
         public Posicao Posicao { get; set; }
         public Cor Cor { get; set; }
@@ -25,5 +25,16 @@ namespace Tabuleiro
         {
             QtdMovimentos++;
         }
+
+        public abstract bool[,] MovimentosPossiveis();
+        /* Poderíamos usar virtual ao invés de abstract, pois o virtual
+         * diz que o método pode ser sobreescrito pelas classes filhas
+         * e se nenhuma classe filha o sobrescreve, quando chamada ele
+         * iria executar o da classe pai, e não é isso que queremos.
+         * Para obrigar as classes filhas a terem um método que sobrescreva
+         * (override) este da classe pai devemos usar o abstract no
+         * método.*/
+
+        
     }
 }
