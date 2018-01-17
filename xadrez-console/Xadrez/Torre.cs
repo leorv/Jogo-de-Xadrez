@@ -27,7 +27,10 @@ namespace Xadrez
             //Acima
             pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
             while (Tab.VerificarPosicao(pos) && PodeMover(pos))
-            {
+            {/* Tem que ter as duas condições satisfeitas, retornará verdadeiro
+                * se a posição for possível executar (não estiver fora dos
+                * limites do tabuleiro) e se o espaço novo for nulo (não ter
+                * peça da mesma cor) ou se existir peça de cor diferente.*/
                 mat[pos.Linha, pos.Coluna] = true;
                 if (Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor)
                 {
@@ -74,6 +77,8 @@ namespace Xadrez
         private bool PodeMover(Posicao pos)
         {
             Peca p = Tab.Peca(pos);
+            // Ele vai poder mover se a posição é igual a nulo
+            // ou se a cor for diferente, pra comer a outra peça.
             return p == null || p.Cor != Cor;
         }
     }

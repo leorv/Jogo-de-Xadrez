@@ -26,6 +26,22 @@ namespace Tabuleiro
             QtdMovimentos++;
         }
 
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] mat = MovimentosPossiveis();
+            for (int i = 0; i < Tab.Linhas; i++)
+            {
+                for (int j = 0; j < Tab.Colunas; j++)
+                {
+                    if (mat[i, j] == true)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public abstract bool[,] MovimentosPossiveis();
         /* Poderíamos usar virtual ao invés de abstract, pois o virtual
          * diz que o método pode ser sobreescrito pelas classes filhas
@@ -33,8 +49,13 @@ namespace Tabuleiro
          * iria executar o da classe pai, e não é isso que queremos.
          * Para obrigar as classes filhas a terem um método que sobrescreva
          * (override) este da classe pai devemos usar o abstract no
-         * método.*/
-
-        
+         * método. Pois não queremos que nenhuma classe filha chame a 
+         * Classe pai.*/      
+         
+        public bool PodeMoverPara(Posicao destino)
+        {
+            return MovimentosPossiveis()[destino.Linha, destino.Coluna];
+            //Caso TRUE, pode mover para o destino.
+        }
     }
 }
