@@ -43,7 +43,7 @@ namespace Xadrez
             return PecaCapturada;
         }
 
-        public void DesfazMovimento (Posicao origem, Posicao destino, Peca PecaCapturada)
+        public void DesfazMovimento(Posicao origem, Posicao destino, Peca PecaCapturada)
         {
             Peca p = Tab.RetirarPeca(destino);
             p.DecrementarQteMovimentos();
@@ -55,7 +55,7 @@ namespace Xadrez
             Tab.ColocarPecas(p, origem);
         }
 
-        public void RealizarJogada (Posicao origem, Posicao destino)
+        public void RealizarJogada(Posicao origem, Posicao destino)
         {
             Peca PecaCapturada = ExecutarMovimento(origem, destino);
 
@@ -74,8 +74,49 @@ namespace Xadrez
                 Xeque = false;
             }
 
-            Turno++;
-            MudarJogador();
+            if (TesteChequeMate(Adversaria(JogadorAtual)))
+            {
+                terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudarJogador();
+            }            
+        }
+
+        public bool TesteChequeMate(Cor cor)
+        {
+            if (!EstaEmXeque(cor))
+            {
+                return false;
+            }
+            //colocar o foreach varrendo as peças.
+            foreach (Peca x in PecasEmJogo(cor))
+            {
+                bool[,] mat = x.MovimentosPossiveis();
+                for (int i = 0; i < Tab.Linhas; i++)
+                {
+                    for (int j = 0; j < Tab.Colunas; j++)
+                    {
+                        if (mat[i,j] == true)
+                        {
+                            Posicao origem = x.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca PecaCapturada = ExecutarMovimento(origem, destino);
+                            /*fazemos o movimento para a posição i,j e vamos verificar
+                             * se isso tira o rei do cheque*/
+                            bool testecheque = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, PecaCapturada);
+                            if (!testecheque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public HashSet<Peca> Capturadas(Cor cor)
@@ -175,7 +216,7 @@ namespace Xadrez
             }
         }
 
-        public void ValidarPosicaoDeDestino (Posicao origem, Posicao destino)
+        public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
             if (!Tab.Peca(origem).PodeMoverPara(destino))
             {//Se for FALSE, ocorre a exceção.
