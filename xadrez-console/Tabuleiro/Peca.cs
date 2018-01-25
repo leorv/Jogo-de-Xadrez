@@ -57,7 +57,7 @@ namespace Tabuleiro
          * método. Pois não queremos que nenhuma classe filha chame a 
          * Classe pai.*/      
          
-        public bool PodeMoverPara(Posicao destino)
+        public bool MovimentoPossivel(Posicao destino)
         {
             return MovimentosPossiveis()[destino.Linha, destino.Coluna];
             //Caso TRUE, pode mover para o destino.

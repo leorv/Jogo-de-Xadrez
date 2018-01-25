@@ -105,7 +105,8 @@ namespace Xadrez
                             Posicao destino = new Posicao(i, j);
                             Peca PecaCapturada = ExecutarMovimento(origem, destino);
                             /*fazemos o movimento para a posição i,j e vamos verificar
-                             * se isso tira o rei do cheque*/
+                             * se isso tira o rei do cheque, caso nenhuma posição
+                             * tirar o rei do cheque, aí meu filho, acabou.*/
                             bool testecheque = EstaEmXeque(cor);
                             DesfazMovimento(origem, destino, PecaCapturada);
                             if (!testecheque)
@@ -218,7 +219,7 @@ namespace Xadrez
 
         public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
-            if (!Tab.Peca(origem).PodeMoverPara(destino))
+            if (!Tab.Peca(origem).MovimentoPossivel(destino))
             {//Se for FALSE, ocorre a exceção.
                 throw new TabuleiroException("Posição inválida!");
             }
