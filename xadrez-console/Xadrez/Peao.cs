@@ -63,7 +63,7 @@ namespace Xadrez
                 }
                 pos.DefinirValores(Posicao.Linha + 2, Posicao.Coluna);
                 Posicao p2 = new Posicao(Posicao.Linha + 1, Posicao.Coluna);
-                if (Tab.VerificarPosicao(p2) && Livre(p2) && Tab.VerificarPosicao(pos) && Livre(pos))
+                if (Tab.VerificarPosicao(p2) && Livre(p2) && Tab.VerificarPosicao(pos) && Livre(pos) && QtdMovimentos == 0)
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
